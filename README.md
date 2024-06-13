@@ -6,7 +6,9 @@ Framework: JavaFX
 Agile Framework: Scrum  
 
 # Delivery Pigeon
-<img src="./imgs/logo-jogo.jpg " alt="cap-do-jogo" height="300px" width="300px">
+<div style="text-align: center;">
+    <img src="./imgs/logo-jogo.jpg " alt="cap-do-jogo" height="300px" width="300px">
+</div>
 
 # Presentation
 Our team, consisting of analysts João Gabriel, João Pedro, Rafael Serio, and Luiz Gustavo, have developed a game inspired by the basic yet addictive mechanics of the classic Flappy Bird. We drew inspiration from the minimalist gameplay of this globally renowned game; however, our narrative and artistic style are entirely original. Under the title 'Delivery Pigeon', this project aims to showcase and enhance our skills in both back-end and front-end development, while applying the rapid methodology known as 'SCRUM'
