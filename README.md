@@ -1,2 +1,2 @@
 # 2RPlayers
-Development update test for the game: "Pigeon Delivery's"
+Development update test for the game: "Delivery Pigeon's"
