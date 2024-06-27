@@ -19,7 +19,7 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
     private int pigeonX = BOARD_WIDTH / 8;
     private int pigeonY = BOARD_WIDTH / 2;
     private int pigeonWidth = 44; // 34
-    private int pigeonHeight = 34; //24
+    private int pigeonHeight = 34; // 24
 
     // Classe Pipe
     private ArrayList<Pipe> pipes;
@@ -42,4 +42,38 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
 
     private JFrame parentFrame;
     private InicioTela inicioTela;
+
+    // Preferências para armazenar a pontuação máxima
+    private Preferences preferences = Preferences.userNodeForPackage(DeliveryPigeon.class);
+    private static final String HIGH_SCORE_KEY = "high_score";
+
+    public DeliveryPigeon(JFrame parentFrame, InicioTela inicioTela) {
+        this.parentFrame = parentFrame;
+        this.inicioTela = inicioTela;
+
+        setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        setFocusable(true);
+        addKeyListener(this);
+
+        // Carregar imagens
+        backgroundImg = loadImage("fundo.gif");
+        pigeonImg = loadImage("pigeon.gif");
+        topPipeImg = loadImage("arvore.jpeg");
+        bottomPipeImg = loadImage("arvore.jpeg");
+
+        // Pigeon
+        pigeon = new Pigeon(pigeonX, pigeonY, pigeonWidth, pigeonHeight, pigeonImg);
+        pipes = new ArrayList<>();
+
+        // Carregar a pontuação máxima salva
+        highScore = preferences.getDouble(HIGH_SCORE_KEY, 0);
+
+        // Timer para colocar os pipes
+        placePipeTimer = new Timer(1500, e -> placePipes());
+        placePipeTimer.start();
+
+        // Timer do jogo
+        gameLoop = new Timer(1000 / 60, this);
+        gameLoop.start();
+    }
 }
