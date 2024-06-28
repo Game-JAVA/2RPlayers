@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Pipe {
 
     private int x;
@@ -20,7 +22,7 @@ public class Pipe {
         return x;
     }
 
-    pubic void setX(int x) {
+    public void setX(int x) {
         this.x = x;
     }
 
