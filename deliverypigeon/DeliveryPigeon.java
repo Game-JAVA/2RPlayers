@@ -76,4 +76,14 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         gameLoop = new Timer(1000 / 60, this);
         gameLoop.start();
     }
+
+    private Image loadImage(String fileName) {
+        Image image = null;
+        try {
+            image = new ImageIcon(getClass().getResource("img/" + fileName)).getImage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
 }
