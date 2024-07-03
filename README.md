@@ -6,7 +6,7 @@ Framework: Java Swing
 Agile Framework: Scrum  
 
 # 🪶 Delivery Pigeon
-<div style="text-align: center;">
+<div align = "center">
     <img src="./arquivos/imgs/logo-jogo.jpg" alt="cap-do-jogo" height="300px" width="300px">
 </div>
 
@@ -22,7 +22,7 @@ In the game "Delivery Pigeon," players will dive into a captivating adventure th
 # ⌨️ Controls
 - 'Space' key to make the pigeon jump.
 - 'P' key to pause the game.
-<div style="text-align: center;">
+<div align = "center">
     <img src="./arquivos/imgs/controls.png" alt="controls" height="300px" width="350px">
 </div>
 
