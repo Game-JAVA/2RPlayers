@@ -2,7 +2,7 @@
 
 Game Project  
 Language: Java 21  
-Framework: JavaFX  
+Framework: Java Swing  
 Agile Framework: Scrum  
 
 # Delivery Pigeon
