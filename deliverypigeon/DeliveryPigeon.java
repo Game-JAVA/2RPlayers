@@ -86,4 +86,8 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         }
         return image;
     }
+
+    private void placePipes() {
+        
+    }
 }
