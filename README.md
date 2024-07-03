@@ -20,6 +20,9 @@ In the game "Delivery Pigeon," players will dive into a captivating adventure th
 "Delivery Pigeon" is a game where players will face the challenge of controlling a pigeon, attempting to keep it airborne with simple taps on specific keys, guiding it through spaces between obstacles while traversing different environments until the end of the Delivery Pigeon's journey.
 
 # ⌨️ Controls
+<div style="text-align: center;">
+    <img src="./arquivos/imgs/controls.png" alt="controls" height="300px" width="350px">
+</div>
 
 # Class Diagram
 The class diagram of the "DeliveryPigeon" game outlines the structure and responsibilities of each class:
