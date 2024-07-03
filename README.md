@@ -39,4 +39,95 @@ Pigeon: Represents the pigeon in the game with its position and image properties
 
 Pipe: Represents the pipes in the game with their position and image properties.
 
-<img src="./arquivos/imgs/DiagramaClasse_page-0001.jpg" alt="cap-do-jogo" height="300px" width="300px">
+```mermaid
+classDiagram
+    class App {
+      +main(args: String[])
+    }
+
+    class InicioTela {
+      -btnIniciarJogo: JButton
+      -btnSair: JButton
+      -lblPontos: JLabel
+      -parentFrame: JFrame
+      -gamePanel: DeliveryPigeon
+      -backgroundImage: BufferedImage
+      +InicioTela(parentFrame: JFrame)
+      +paintComponent(g: Graphics)
+      +showScore(score: int)
+      +iniciarJogo()
+      +sair()
+      +showInicioTela()
+      +main(args: String[])
+    }
+
+    class DeliveryPigeon {
+      -boardWidth: int
+      -boardHeight: int
+      -backgroundImg: Image
+      -pigeonImg: Image
+      -topPipeImg: Image
+      -bottomPipeImg: Image
+      -pigeonX: int
+      -pigeonY: int
+      -pigeonWidth: int
+      -pigeonHeight: int
+      -pipeX: int
+      -pipeY: int
+      -pipeWidth: int
+      -pipeHeight: int
+      -pigeon: Pigeon
+      -velocityX: int
+      -velocityY: int
+      -gravity: int
+      -pipes: ArrayList~Pipe~
+      -random: Random
+      -gameLoop: Timer
+      -placePipeTimer: Timer
+      -gameOver: boolean
+      -score: double
+      -highScore: double
+      -paused: boolean
+      -parentFrame: JFrame
+      -inicioTela: InicioTela
+      -preferences: Preferences
+      +DeliveryPigeon(parentFrame: JFrame, inicioTela: InicioTela)
+      -loadImage(fileName: String): Image
+      -placePipes()
+      +paintComponent(g: Graphics)
+      +draw(g: Graphics)
+      +showInicioTela()
+      +restartGame()
+      +move()
+      +collision(a: Pigeon, b: Pipe): boolean
+      +actionPerformed(e: ActionEvent)
+      +keyPressed(e: KeyEvent)
+      +keyTyped(e: KeyEvent)
+      +keyReleased(e: KeyEvent)
+      +main(args: String[])
+    }
+
+    class Pigeon {
+      -x: int
+      -y: int
+      -width: int
+      -height: int
+      -img: Image
+      +Pigeon(img: Image)
+    }
+
+    class Pipe {
+      -x: int
+      -y: int
+      -width: int
+      -height: int
+      -img: Image
+      -passed: boolean
+      +Pipe(img: Image)
+    }
+
+    App --> InicioTela
+    InicioTela --> DeliveryPigeon
+    DeliveryPigeon --> Pigeon
+    DeliveryPigeon --> Pipe
+
