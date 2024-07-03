@@ -5,7 +5,7 @@ Language: Java 21
 Framework: Java Swing  
 Agile Framework: Scrum  
 
-# Delivery Pigeon
+# 🪶 Delivery Pigeon
 <div style="text-align: center;">
     <img src="./arquivos/imgs/logo-jogo.jpg" alt="cap-do-jogo" height="300px" width="300px">
 </div>
