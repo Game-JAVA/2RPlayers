@@ -26,7 +26,7 @@ In the game "Delivery Pigeon," players will dive into a captivating adventure th
     <img src="./arquivos/imgs/controls.png" alt="controls" height="300px" width="350px">
 </div>
 
-# Class Diagram
+# 📄 Class Diagram
 The class diagram of the "DeliveryPigeon" game outlines the structure and responsibilities of each class:
 
 App: The main class that starts the game with the main method.
