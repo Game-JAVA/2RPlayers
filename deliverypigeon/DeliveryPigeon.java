@@ -88,6 +88,13 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
     }
 
     private void placePipes() {
-        
+        int randomPipeY = (int) (pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2));
+        int openingSpace = BOARD_HEIGHT / 4;
+
+        Pipe topPipe = new Pipe(pipeX, randomPipeY, pipeWidth, pipeHeight, topPipeImg);
+        pipes.add(topPipe);
+
+        Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight, bottomPipeImg);
+        pipes.add(bottomPipe);
     }
 }
