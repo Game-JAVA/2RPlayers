@@ -130,4 +130,9 @@ classDiagram
     InicioTela --> DeliveryPigeon
     DeliveryPigeon --> Pigeon
     DeliveryPigeon --> Pipe
+```
 
+# 📁 Download
+```
+git clone https://github.com/Game-JAVA/2RPlayers.git
+```
