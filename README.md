@@ -16,7 +16,7 @@ Our team, consisting of analysts João Gabriel, João Pedro, Rafael Serio, and L
 # 🏔️ Prologue
 In the game "Delivery Pigeon," players will dive into a captivating adventure that features 3 stages: countryside, city, and the sewage system. Controlling a carrier pigeon, they will navigate through these environments, challenged to avoid collisions with obstacles such as poles and pipes. With each stage completed, the player progresses to a new environment, but a collision with any obstacle signifies the end of the journey.
 
-# Gameplay
+# 🎮 Gameplay
 "Delivery Pigeon" is a game where players will face the challenge of controlling a pigeon, attempting to keep it airborne with simple taps on specific keys, guiding it through spaces between obstacles while traversing different environments until the end of the Delivery Pigeon's journey.
 
 # Controls
