@@ -94,7 +94,8 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         Pipe topPipe = new Pipe(pipeX, randomPipeY, pipeWidth, pipeHeight, topPipeImg);
         pipes.add(topPipe);
 
-        Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight, bottomPipeImg);
+        Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight,
+                bottomPipeImg);
         pipes.add(bottomPipe);
     }
 
@@ -105,16 +106,32 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
     }
 
     private void draw(Graphics g) {
-                // Background
-                g.drawImage(backgroundImg, 0, 0, BOARD_WIDTH, BOARD_HEIGHT, null);
+        // Background
+        g.drawImage(backgroundImg, 0, 0, BOARD_WIDTH, BOARD_HEIGHT, null);
 
-                // Pigeon
-                g.drawImage(pigeon.getImg(), pigeon.getX(), pigeon.getY(), pigeon.getWidth(), pigeon.getHeight(), null);
-        
-                // Pipes
-                for (int i = 0; i < pipes.size(); i++) {
-                    Pipe pipe = pipes.get(i);
-                    g.drawImage(pipe.getImg(), pipe.getX(), pipe.getY(), pipe.getWidth(), pipe.getHeight(), null);
-                }
+        // Pigeon
+        g.drawImage(pigeon.getImg(), pigeon.getX(), pigeon.getY(), pigeon.getWidth(), pigeon.getHeight(), null);
+
+        // Pipes
+        for (int i = 0; i < pipes.size(); i++) {
+            Pipe pipe = pipes.get(i);
+            g.drawImage(pipe.getImg(), pipe.getX(), pipe.getY(), pipe.getWidth(), pipe.getHeight(), null);
+        }
+        // Score
+        g.setColor(Color.black); // Fundo preto para o contador de pontos
+        g.fillRect(0, 0, 280, 40); // Retângulo preto para o fundo do contador de pontos
+        g.setColor(Color.white);
+        g.setFont(new Font("Arial", Font.PLAIN, 32));
+        if (gameOver) {
+            g.setColor(Color.red); // Cor vermelha para o texto de "Game Over"
+            g.drawString("Game Over: " + String.valueOf((int) score), 10, 35);
+        } else {
+            g.drawString("Score:" + String.valueOf((int) score), 10, 35);
+            g.setColor(Color.black); // Fundo preto para o contador de pontos
+            g.fillRect(0, 40, 280, 40); // Retângulo preto para o fundo do contador de pontos
+            g.setColor(Color.white); // Fundo preto para o contador de pontos
+            g.drawString("High Score:" + String.valueOf((int) highScore), 10, 70); // High score no canto inferior
+                                                                                   // esquerdo
+        }
     }
 }
