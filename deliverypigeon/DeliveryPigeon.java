@@ -103,4 +103,18 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         super.paintComponent(g);
         draw(g);
     }
+
+    private void draw(Graphics g) {
+                // Background
+                g.drawImage(backgroundImg, 0, 0, BOARD_WIDTH, BOARD_HEIGHT, null);
+
+                // Pigeon
+                g.drawImage(pigeon.getImg(), pigeon.getX(), pigeon.getY(), pigeon.getWidth(), pigeon.getHeight(), null);
+        
+                // Pipes
+                for (int i = 0; i < pipes.size(); i++) {
+                    Pipe pipe = pipes.get(i);
+                    g.drawImage(pipe.getImg(), pipe.getX(), pipe.getY(), pipe.getWidth(), pipe.getHeight(), null);
+                }
+    }
 }
