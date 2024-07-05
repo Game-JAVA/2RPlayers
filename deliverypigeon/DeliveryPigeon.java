@@ -134,4 +134,13 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
             g.drawString("High Score:" + String.valueOf((int) highScore), 10, 70); // High score no canto inferior esquerdo
         }
     }
+
+    private void showInicioTela() {
+        parentFrame.getContentPane().removeAll();
+        inicioTela.showScore((int) score); // Exibe os pontos na tela inicial
+        parentFrame.add(inicioTela);
+        parentFrame.setSize(BOARD_WIDTH, BOARD_HEIGHT);
+        parentFrame.revalidate();
+        parentFrame.repaint();
+    }
 }
