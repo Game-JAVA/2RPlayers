@@ -97,4 +97,13 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight, bottomPipeImg);
         pipes.add(bottomPipe);
     }
+
+    private void showInicioTela() {
+        parentFrame.getContentPane().removeAll();
+        inicioTela.showScore((int) score); // Exibe os pontos na tela inicial
+        parentFrame.add(inicioTela);
+        parentFrame.setSize(BOARD_WIDTH, BOARD_HEIGHT);
+        parentFrame.revalidate();
+        parentFrame.repaint();
+    }
 }
