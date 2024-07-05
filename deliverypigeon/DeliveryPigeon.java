@@ -106,4 +106,14 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         parentFrame.revalidate();
         parentFrame.repaint();
     }
+
+    private void restartGame() {
+        pigeon.setY(pigeonY);
+        velocityY = 0;
+        pipes.clear();
+        gameOver = false;
+        score = 0;
+        gameLoop.start();
+        placePipeTimer.start();
+    }
 }
