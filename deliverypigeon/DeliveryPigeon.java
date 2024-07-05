@@ -153,7 +153,7 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         gameLoop.start();
         placePipeTimer.start();
     }
-    
+
     private void restartGame() {
         pigeon.setY(pigeonY);
         velocityY = 0;
@@ -162,6 +162,36 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         score = 0;
         gameLoop.start();
         placePipeTimer.start();
+    }
+
+    private void move() {
+        if (!paused) {
+            // Pigeon
+            velocityY += gravity;
+            pigeon.setY(pigeon.getY() + velocityY);
+            pigeon.setY(Math.max(pigeon.getY(), 0));
+
+            // Pipes
+            for (int i = 0; i < pipes.size(); i++) {
+                Pipe pipe = pipes.get(i);
+                pipe.setX(pipe.getX() + velocityX);
+
+                if (!pipe.isPassed() && pigeon.getX() > pipe.getX() + pipe.getWidth()) {
+                    score += 0.5; // Incrementar score ao passar pelo pipe
+                    pipe.setPassed(true);
+                }
+
+                if (collision(pigeon, pipe)) {
+                    gameOver = true;
+                }
+            }
+
+            // Verificar se o pigeon caiu para fora da tela
+            if (pigeon.getY() > BOARD_HEIGHT) {
+                gameOver = true;
+            }
+        }
+        // Se estiver pausado, não faz nada além de não mover os pipes
     }
 
 }
