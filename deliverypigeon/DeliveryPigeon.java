@@ -94,7 +94,8 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         Pipe topPipe = new Pipe(pipeX, randomPipeY, pipeWidth, pipeHeight, topPipeImg);
         pipes.add(topPipe);
 
-        Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight, bottomPipeImg);
+        Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight,
+                bottomPipeImg);
         pipes.add(bottomPipe);
     }
 
@@ -116,7 +117,6 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         gameLoop.start();
         placePipeTimer.start();
     }
-
 
     private void move() {
         if (!paused) {
@@ -148,14 +148,12 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         // Se estiver pausado, não faz nada além de não mover os pipes
     }
 
-
     private boolean collision(Pigeon a, Pipe b) {
         return a.getX() < b.getX() + b.getWidth() &&
-               a.getX() + a.getWidth() > b.getX() &&
-               a.getY() < b.getY() + b.getHeight() &&
-               a.getY() + a.getHeight() > b.getY();
+                a.getX() + a.getWidth() > b.getX() &&
+                a.getY() < b.getY() + b.getHeight() &&
+                a.getY() + a.getHeight() > b.getY();
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -191,5 +189,14 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
                 placePipeTimer.stop(); // Pausa o timer de colocar pipes
             }
         }
+    }
+
+    // Métodos não utilizados
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }
