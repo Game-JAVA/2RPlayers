@@ -194,4 +194,11 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         // Se estiver pausado, não faz nada além de não mover os pipes
     }
 
+    private boolean collision(Pigeon a, Pipe b) {
+        return a.getX() < b.getX() + b.getWidth() &&
+               a.getX() + a.getWidth() > b.getX() &&
+               a.getY() < b.getY() + b.getHeight() &&
+               a.getY() + a.getHeight() > b.getY();
+    }
+
 }
