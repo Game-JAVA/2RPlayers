@@ -155,4 +155,21 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
                a.getY() < b.getY() + b.getHeight() &&
                a.getY() + a.getHeight() > b.getY();
     }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        move();
+        repaint();
+        if (gameOver) {
+            placePipeTimer.stop();
+            gameLoop.stop();
+            // Atualizar a pontuação máxima se necessário
+            if (score > highScore) {
+                highScore = score;
+                preferences.putDouble(HIGH_SCORE_KEY, highScore);
+            }
+            showInicioTela(); // Mostra a tela inicial imediatamente
+        }
+    }
 }
