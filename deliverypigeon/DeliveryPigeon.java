@@ -172,4 +172,24 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
             showInicioTela(); // Mostra a tela inicial imediatamente
         }
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            velocityY = -9; // Velocidade do pulo
+
+            if (gameOver) {
+                restartGame();
+            }
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {
+            paused = !paused; // Inverte o estado de pausa
+            if (!paused) {
+                gameLoop.start(); // Reinicia o loop do jogo se não estiver pausado
+                placePipeTimer.start(); // Reinicia o timer de colocar pipes
+            } else {
+                gameLoop.stop(); // Pausa o loop do jogo
+                placePipeTimer.stop(); // Pausa o timer de colocar pipes
+            }
+        }
+    }
 }
