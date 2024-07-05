@@ -237,4 +237,11 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         }
     }
 
+        // Métodos não utilizados
+        @Override
+        public void keyTyped(KeyEvent e) {}
+    
+        @Override
+        public void keyReleased(KeyEvent e) {}
+
 }
