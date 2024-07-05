@@ -218,18 +218,22 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        move();
-        repaint();
-        if (gameOver) {
-            placePipeTimer.stop();
-            gameLoop.stop();
-            // Atualizar a pontuação máxima se necessário
-            if (score > highScore) {
-                highScore = score;
-                preferences.putDouble(HIGH_SCORE_KEY, highScore);
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            velocityY = -9; // Velocidade do pulo
+
+            if (gameOver) {
+                restartGame();
             }
-            showInicioTela(); // Mostra a tela inicial imediatamente
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {
+            paused = !paused; // Inverte o estado de pausa
+            if (!paused) {
+                gameLoop.start(); // Reinicia o loop do jogo se não estiver pausado
+                placePipeTimer.start(); // Reinicia o timer de colocar pipes
+            } else {
+                gameLoop.stop(); // Pausa o loop do jogo
+                placePipeTimer.stop(); // Pausa o timer de colocar pipes
+            }
         }
     }
 
