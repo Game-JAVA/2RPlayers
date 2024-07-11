@@ -134,3 +134,13 @@ public class InicioTela extends JPanel {
     private void sair() {
         System.exit(0);
     }
+
+    public void showInicioTela() {
+        parentFrame.getContentPane().removeAll();
+        parentFrame.add(this); // Adicionando a própria instância de InicioTela de volta
+        parentFrame.setSize(500, 650); // Mantendo as dimensões padrão da tela
+        parentFrame.revalidate();
+        parentFrame.repaint();
+        parentFrame.setLocationRelativeTo(null); // Centraliza o JFrame na tela
+        parentFrame.setVisible(true); // Tornar o JFrame visível
+    }
