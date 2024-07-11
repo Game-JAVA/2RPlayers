@@ -7,6 +7,7 @@ public class App {
             int boardHeight = 650;
 
             JFrame frame = new JFrame("Delivery Pigeon");
+            frame.setSize(boardWidth, boardHeight);
         });
     }
 }
