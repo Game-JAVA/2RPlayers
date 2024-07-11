@@ -13,6 +13,7 @@ public class App {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             InicioTela inicioTela = new InicioTela(frame);
+            frame.add(inicioTela);
         });
     }
 }
