@@ -9,6 +9,7 @@ public class App {
             JFrame frame = new JFrame("Delivery Pigeon");
             frame.setSize(boardWidth, boardHeight);
             frame.setLocationRelativeTo(null);
+            frame.setResizable(false);
         });
     }
 }
