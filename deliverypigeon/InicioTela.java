@@ -118,3 +118,19 @@ public class InicioTela extends JPanel {
     public void showScore(int score) {
         lblPontos.setText("Pontuação: " + score);
     }
+
+    private void iniciarJogo() {
+        gamePanel = new DeliveryPigeon(parentFrame, this); // Passando a própria tela inicial como argumento
+        parentFrame.getContentPane().removeAll();
+        parentFrame.add(gamePanel);
+        parentFrame.revalidate();
+        parentFrame.repaint();
+        parentFrame.pack();
+        parentFrame.setLocationRelativeTo(null);
+        parentFrame.setVisible(true);
+        gamePanel.requestFocusInWindow(); // Garante que o jogo tenha foco para detectar eventos de teclado
+    }
+
+    private void sair() {
+        System.exit(0);
+    }
