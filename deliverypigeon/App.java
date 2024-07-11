@@ -14,6 +14,7 @@ public class App {
 
             InicioTela inicioTela = new InicioTela(frame);
             frame.add(inicioTela);
+            frame.pack();
         });
     }
 }
