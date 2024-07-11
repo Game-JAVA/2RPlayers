@@ -5,6 +5,8 @@ public class App {
         SwingUtilities.invokeLater(() -> {
             int boardWidth = 500;
             int boardHeight = 650;
+
+            JFrame frame = new JFrame("Delivery Pigeon");
         });
     }
 }
