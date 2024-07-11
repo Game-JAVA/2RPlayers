@@ -105,3 +105,16 @@ public class InicioTela extends JPanel {
         setFocusable(true);
         requestFocusInWindow();
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        // Desenhar a imagem de fundo se estiver carregada
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
+    public void showScore(int score) {
+        lblPontos.setText("Pontuação: " + score);
+    }
