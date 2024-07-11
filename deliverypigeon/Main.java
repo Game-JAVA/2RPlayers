@@ -8,6 +8,7 @@ public class Main{
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLocationRelativeTo(null);
             frame.setSize(500, 650); // Mantendo as dimensões padrão da tela
+            frame.setVisible(true);
         });
     }
 }
