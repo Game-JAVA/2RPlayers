@@ -5,6 +5,9 @@ public class Main{
             InicioTela inicioTela = new InicioTela(frame);
             frame.add(inicioTela);
             frame.pack();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLocationRelativeTo(null);
+            frame.setSize(500, 650); // Mantendo as dimensões padrão da tela
         });
     }
 }
