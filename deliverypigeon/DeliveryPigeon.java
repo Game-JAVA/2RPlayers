@@ -2,15 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.prefs.Preferences;
 
 public class DeliveryPigeon extends JPanel implements ActionListener, KeyListener {
+
     private static final int BOARD_WIDTH = 600;
     private static final int BOARD_HEIGHT = 650;
 
     // Variáveis de imagens
     private Image backgroundImg;
-    private Image pigeonImg;
+    private Image[] pigeonFrames = new Image[4]; // Array para os frames do pigeon
     private Image topPipeImg;
     private Image bottomPipeImg;
 
@@ -19,7 +21,7 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
     private int pigeonX = BOARD_WIDTH / 8;
     private int pigeonY = BOARD_WIDTH / 2;
     private int pigeonWidth = 44; // 34
-    private int pigeonHeight = 34; // 24
+    private int pigeonHeight = 34; //24
 
     // Classe Pipe
     private ArrayList<Pipe> pipes;
@@ -35,10 +37,13 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
 
     private Timer gameLoop;
     private Timer placePipeTimer;
+    private Timer pigeonAnimationTimer; // Timer para a troca de frames do pigeon
+    private Timer rapidAnimationTimer; // Timer para animação rápida do pigeon
     private boolean gameOver = false;
     private double score = 0;
     private double highScore = 0; // Pontuação máxima
     private boolean paused = false; // Variável de controle de pausa
+    private boolean rapidAnimationActive = false; // Flag para controlar se a animação rápida está ativa
 
     private JFrame parentFrame;
     private InicioTela inicioTela;
@@ -46,6 +51,8 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
     // Preferências para armazenar a pontuação máxima
     private Preferences preferences = Preferences.userNodeForPackage(DeliveryPigeon.class);
     private static final String HIGH_SCORE_KEY = "high_score";
+
+    private Random random = new Random();
 
     public DeliveryPigeon(JFrame parentFrame, InicioTela inicioTela) {
         this.parentFrame = parentFrame;
@@ -57,12 +64,12 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
 
         // Carregar imagens
         backgroundImg = loadImage("fundo.gif");
-        pigeonImg = loadImage("pigeon.gif");
+        loadPigeonFrames(); // Carregar os frames do pigeon
         topPipeImg = loadImage("arvore.jpeg");
         bottomPipeImg = loadImage("arvore.jpeg");
 
         // Pigeon
-        pigeon = new Pigeon(pigeonX, pigeonY, pigeonWidth, pigeonHeight, pigeonImg);
+        pigeon = new Pigeon(pigeonX, pigeonY, pigeonWidth, pigeonHeight, pigeonFrames[0]); // Iniciar com o primeiro frame
         pipes = new ArrayList<>();
 
         // Carregar a pontuação máxima salva
@@ -75,6 +82,13 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         // Timer do jogo
         gameLoop = new Timer(1000 / 60, this);
         gameLoop.start();
+
+        // Timer para a animação do pigeon (troca de frames)
+        pigeonAnimationTimer = new Timer(100, e -> animatePigeon());
+        pigeonAnimationTimer.start();
+
+        // Timer para animação rápida do pigeon
+        rapidAnimationTimer = new Timer(100, e -> animatePigeon());
     }
 
     private Image loadImage(String fileName) {
@@ -87,6 +101,12 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         return image;
     }
 
+    private void loadPigeonFrames() {
+        for (int i = 0; i < 4; i++) {
+            pigeonFrames[i] = loadImage("frame-" + (i + 1) + ".png");
+        }
+    }
+
     private void placePipes() {
         int randomPipeY = (int) (pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2));
         int openingSpace = BOARD_HEIGHT / 4;
@@ -94,8 +114,7 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         Pipe topPipe = new Pipe(pipeX, randomPipeY, pipeWidth, pipeHeight, topPipeImg);
         pipes.add(topPipe);
 
-        Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight,
-                bottomPipeImg);
+        Pipe bottomPipe = new Pipe(pipeX, topPipe.getY() + pipeHeight + openingSpace, pipeWidth, pipeHeight, bottomPipeImg);
         pipes.add(bottomPipe);
     }
 
@@ -152,6 +171,7 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         score = 0;
         gameLoop.start();
         placePipeTimer.start();
+        pigeonAnimationTimer.start(); // Reiniciar o timer de animação do pigeon
     }
 
     private void move() {
@@ -186,9 +206,15 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
 
     private boolean collision(Pigeon a, Pipe b) {
         return a.getX() < b.getX() + b.getWidth() &&
-               a.getX() + a.getWidth() > b.getX() &&
-               a.getY() < b.getY() + b.getHeight() &&
-               a.getY() + a.getHeight() > b.getY();
+                a.getX() + a.getWidth() > b.getX() &&
+                a.getY() < b.getY() + b.getHeight() &&
+                a.getY() + a.getHeight() > b.getY();
+    }
+
+    // Método para a troca suave de frames do pigeon
+    private void animatePigeon() {
+        int randomIndex = random.nextInt(4); // Gera um índice aleatório entre 0 e 3
+        pigeon.setImg(pigeonFrames[randomIndex]);
     }
 
     @Override
@@ -198,6 +224,8 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
         if (gameOver) {
             placePipeTimer.stop();
             gameLoop.stop();
+            pigeonAnimationTimer.stop();
+            rapidAnimationTimer.stop(); // Parar o timer de animação rápida, se estiver ativo
             // Atualizar a pontuação máxima se necessário
             if (score > highScore) {
                 highScore = score;
@@ -214,24 +242,47 @@ public class DeliveryPigeon extends JPanel implements ActionListener, KeyListene
 
             if (gameOver) {
                 restartGame();
+            } else {
+                // Ativar animação rápida do pigeon
+                if (!rapidAnimationActive) {
+                    rapidAnimationActive = true;
+                    rapidAnimationTimer.start(); // Iniciar o timer de animação rápida
+                }
             }
         } else if (e.getKeyCode() == KeyEvent.VK_P) {
             paused = !paused; // Inverte o estado de pausa
             if (!paused) {
                 gameLoop.start(); // Reinicia o loop do jogo se não estiver pausado
                 placePipeTimer.start(); // Reinicia o timer de colocar pipes
+                pigeonAnimationTimer.start(); // Reinicia o timer de animação do pigeon
+                if (rapidAnimationActive) {
+                    rapidAnimationTimer.start(); // Reiniciar o timer de animação rápida, se estiver ativo
+                }
             } else {
                 gameLoop.stop(); // Pausa o loop do jogo
                 placePipeTimer.stop(); // Pausa o timer de colocar pipes
+                pigeonAnimationTimer.stop(); // Pausa o timer de animação do pigeon
+                rapidAnimationTimer.stop(); // Parar o timer de animação rápida, se estiver ativo
+                rapidAnimationActive = false; // Resetar flag de animação rápida
             }
         }
     }
 
-        // Métodos não utilizados
-        @Override
-        public void keyTyped(KeyEvent e) {}
-    
-        @Override
-        public void keyReleased(KeyEvent e) {}
+    // Métodos não utilizados
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            // Parar a animação rápida do pigeon quando a barra de espaço é solta
+            if (rapidAnimationActive) {
+                rapidAnimationTimer.stop();
+                rapidAnimationActive = false;
+            }
+        }
+    }
+
 
 }
