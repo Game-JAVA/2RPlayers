@@ -144,3 +144,15 @@ public class InicioTela extends JPanel {
         parentFrame.setLocationRelativeTo(null); // Centraliza o JFrame na tela
         parentFrame.setVisible(true); // Tornar o JFrame visível
     }
+
+    // Classe para criar botões transparentes com texto e bordas brancas
+    private class TransparentButton extends JButton {
+        public TransparentButton(String text) {
+            super(text);
+            setOpaque(false);
+            setContentAreaFilled(false);
+            setForeground(Color.WHITE); // Cor do texto branca
+            setBorder(BorderFactory.createLineBorder(Color.WHITE)); // Borda branca
+        }
+    }
+}
