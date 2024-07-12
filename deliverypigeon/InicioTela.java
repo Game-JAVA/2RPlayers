@@ -41,7 +41,7 @@ public class InicioTela extends JPanel {
         // Carregar a imagem de fundo
         try {
             // Substitua o caminho da imagem conforme necessário
-            backgroundImage = ImageIO.read(new File("img/banner.jpeg")); // Exemplo: "src/fundo.jpg"
+            backgroundImage = ImageIO.read(new File("deliverypigeon/img/banner.jpeg")); // Exemplo: "src/fundo.jpg"
         } catch (IOException e) {
             e.printStackTrace();
         }
